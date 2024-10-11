@@ -1,5 +1,6 @@
 from src import masks
+from src.processing import filter_by_state, sort_by_date
+from src.widget import mask_account_card
 
 if __name__ == "__main__":
-    print(masks.get_mask_card_number("7000792289606361"))
-    print(masks.get_mask_account("73654108430135874305"))
+    print(sort_by_date([{'id': 41428829, 'state': 'EXECUTED', "date": None}]))
