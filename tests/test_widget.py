@@ -33,14 +33,16 @@ def test_get_date_correct(data_correct: str) -> None:
 @pytest.mark.parametrize(
     "value, expected",
     [
-        ("2024-03-11T02:26:18.671407", "11.03.2024"),
-        ("2023-02-20T12:00:00.000000", "20.02.2023"),
         ("", "Некорректная дата"),
         (" ", "Некорректная дата"),
-        (132, "Некорректная дата"),
         ("Jnsaj7672", "Некорректная дата"),
         ("2024-03-11T02:26", "11.03.2024"),
     ],
 )
 def test_get_date(value: str, expected: str) -> None:
-    assert get_date(value) == expected
+    with pytest.raises(ValueError):
+        get_date(value)
+
+def test_get_date_invalid_type():
+    with pytest.raises(ValueError):
+        get_date(22022014)
