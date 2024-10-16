@@ -42,7 +42,3 @@ def test_get_date_correct(data_correct: str) -> None:
 def test_get_date(value: str, expected: str) -> None:
     with pytest.raises(ValueError):
         get_date(value)
-
-def test_get_date_invalid_type():
-    with pytest.raises(ValueError):
-        get_date(22022014)

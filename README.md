@@ -23,6 +23,7 @@ pip install -r requirements.txt
 ├── src/                           # Исходный код приложения
 │   ├── __init__.py                # Инициализация основного модуля
 │   ├── masks.py                   # Модуль с масками данных
+│   ├── decorators.py              # Моудль с декоратором
 │   ├── widget.py                  # Виджет для основной функциональности
 │   ├── processing.py              # Модуль для обработки данных
 │   └── generators.py              # Модуль содержащий функции, реализующие генераторы для обработки данных.
@@ -31,10 +32,10 @@ pip install -r requirements.txt
 │   ├── __init__.py                # Инициализация тестов
 │   ├── conftest.py                # Общие фикстуры для тестов
 │   ├── test_masks.py              # Тесты для модуля masks.py
-│   ├── test_widget.py             # Тесты для виджета widget.py
-│   ├── test_widget.py             # Тесты для виджета widget.py
+│   ├── test_decorators.py         # Тесты для модуля обработки данных decorators.py
+│   ├── test_generators.py         # Тесты для модуля обработки данных generators.py
 │   ├── test_processing.py         # Тесты для модуля обработки данных processing.py
-│   └── generators.py         # Тесты для модуля обработки данных generators.py
+│   └── test_widget.py             # Тесты для виджета widget.py
 │
 ├── .coverage                      # Файл с результатами покрытия кода
 ├── .flake8                        # Настройки для проверки качества кода
@@ -157,6 +158,35 @@ from src.generators import card_number_generator
 for card_number in card_number_generator(3, 3):
     print(card_number) # 0000 0000 0000 0003
 ```
+#### 4. Decorators
+
+**def_log**: Функция, которая будет автоматически логировать начало и конец выполнения функции, а также ее результаты или возникшие ошибки.
+Декоратор должен принимать необязательный аргумент *filename*, который определяет, куда будут записываться логи (в файл или в консоль):
+
+- Если *filename* задан, логи записываются в указанный файл.
+- Если *filename* не задан, логи выводятся в консоль.
+### Пример использования декоратора
+```python
+from src.decorators import log, my_function
+
+
+@log(filename="mylog.txt")
+def my_function(x, y):
+    return x + y
+
+my_function(1, 2)
+```
+#### Ожидаемый вывод в лог-файл mylog.txt при успешном выполнении:
+``
+my_function ok
+``
+
+Ожидаемый вывод при ошибке:
+``
+my_function error: тип ошибки. Inputs: (1, 2), {}
+``
+
+Где *тип ошибки* заменяется на текст ошибки.
 
 ## Тестирование
 Для Запуска тестов используйте команду
