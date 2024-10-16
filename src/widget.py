@@ -1,3 +1,4 @@
+from _datetime import datetime
 from src.masks import get_mask_account, get_mask_card_number
 
 
@@ -15,12 +16,10 @@ def mask_account_card(account_card: str) -> str:
         return "Номер карты или счета не корректен"
 
 
-def get_date(date: str | int) -> str:
-    """Функция принимает дату в формате, например, "2024-03-11T02:26:18.671407" и возвращает в формате "ДД.ММ.ГГГГ" """
+def get_date(date: str) -> str:
     if not isinstance(date, str):
-        return "Некорректная дата"
+        raise ValueError("Ожидается строка, но был передан другой тип данных")
     try:
-        year, month, day = date.split("T")[0].split("-")
-        return f"{day}.{month}.{year}"
-    except (ValueError, IndexError):
-        return "Некорректная дата"
+        return datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
+    except ValueError:
+        raise ValueError("Неверный формат даты")
