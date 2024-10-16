@@ -10,7 +10,6 @@ def transaction_descriptions(transactions: list) -> Generator:
         yield transaction.get("description")
 
 
-
 def card_number_generator(start: int, stop: int) -> Generator:
     while start != stop + 1 and start <= stop:
         card = f"{str(start):0>16}"
