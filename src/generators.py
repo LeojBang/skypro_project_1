@@ -1,4 +1,6 @@
 from typing import Generator
+
+
 def filter_by_currency(transactions: list, currency: str) -> Generator:
     for transaction in transactions:
         if transaction.get("operationAmount").get("currency").get("code") == currency:
@@ -8,7 +10,6 @@ def filter_by_currency(transactions: list, currency: str) -> Generator:
 def transaction_descriptions(transactions: list) -> Generator:
     for transaction in transactions:
         yield transaction.get("description")
-
 
 
 def card_number_generator(start: int, stop: int) -> Generator:
