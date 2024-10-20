@@ -31,6 +31,14 @@ def test_filter_by_state(value: list, state: str, expected: list) -> None:
         filter_by_state(value, state)
 
 
+def test_filter_by_state_invalid() -> None:
+    with pytest.raises(TypeError, match="Элемент my_list должен быть словарем"):
+        filter_by_state([""], "")
+
+    with pytest.raises(ValueError, match="Каждый словарь должен содержать ключ 'state'"):
+        filter_by_state([{"id": 41428829, "date": "2019-07-03T18:35:29.512364"}])
+
+
 def test_sort_by_date_reverse(sort_by_date_correct: list) -> None:
     assert (
         sort_by_date(

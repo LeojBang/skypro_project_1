@@ -42,3 +42,8 @@ def test_get_date_correct(data_correct: str) -> None:
 def test_get_date(value: str, expected: str) -> None:
     with pytest.raises(ValueError):
         get_date(value)
+
+
+def test_get_date_no_str() -> None:
+    with pytest.raises(ValueError, match="Ожидается строка, но был передан другой тип данных"):
+        get_date([])

@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from src.masks import get_mask_account, get_mask_card_number
 
@@ -17,7 +18,7 @@ def mask_account_card(account_card: str) -> str:
         return "Номер карты или счета не корректен"
 
 
-def get_date(date: str) -> str:
+def get_date(date: Any) -> str:
     if not isinstance(date, str):
         raise ValueError("Ожидается строка, но был передан другой тип данных")
     try:
