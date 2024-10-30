@@ -20,7 +20,9 @@ def test_my_function_success(capsys: CaptureFixture) -> None:
 
 def test_my_function_logs_success_to_file() -> None:
     log_file = os.path.abspath("test_log.txt")  # Создаем временный файл для логов
-    my_function_with_logging = log(filename=str(log_file))(my_function)
+    decorated_func = log(filename=str(log_file))
+
+    my_function_with_logging = decorated_func(my_function)
 
     # Вызов функции с корректными данными
     my_function_with_logging(1, 2)
@@ -32,8 +34,8 @@ def test_my_function_logs_success_to_file() -> None:
 
 def test_my_function_logs_error_to_file() -> None:
     log_file = os.path.abspath("test_log.txt")  # Создаем временный файл для логов
-    my_function_with_logging = log(filename=str(log_file))(my_function)
-
+    decorated_func = log(filename=str(log_file))
+    my_function_with_logging = decorated_func(my_function)
     # Вызов функции с корректными данными
     with pytest.raises(TypeError):
         my_function_with_logging(1, "2")

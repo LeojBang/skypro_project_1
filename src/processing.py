@@ -1,7 +1,9 @@
-from typing import Dict, List
+from typing import Any, Dict, List
 
 
-def filter_by_state(my_list: List[Dict[str, str | int]], state: str = "EXECUTED") -> List[Dict[str, str | int]] | str:
+def filter_by_state(
+    my_list: List[Dict[str, str | int]] | Any, state: str = "EXECUTED"
+) -> List[Dict[str, str | int]] | str:
     """Функция принимает и возвращает новый список словарей, у которых ключ state соответствует указанному значению"""
     if not isinstance(my_list, list):
         raise TypeError("my_list должен быть списком словарей")
