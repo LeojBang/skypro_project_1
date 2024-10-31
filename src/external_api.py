@@ -17,7 +17,7 @@ def convert_transaction_amount_to_rub(transaction: dict) -> float:
     code = transaction["operationAmount"]["currency"]["code"]
 
     if code in ["USD", "EUR"]:
-        response = requests.request("GET", URL_TO_CONVERT, headers=HEADERS)
+        response = requests.request("GET", url=URL_TO_CONVERT, headers=HEADERS)
         rate = response.json()["rates"][code]
 
         return float(amount / rate)
