@@ -8,7 +8,7 @@ from src.external_api import convert_transaction_amount_to_rub
 # Загрузка переменных окружения
 load_dotenv()
 HEADERS = {"apikey": os.getenv("API_KEY")}
-URL_TO_CONVERT = "https://api.apilayer.com/exchangerates_data/latest?symbols=USD%2CEUR&base=RUB"
+URL_TO_CONVERT = os.getenv("URL_TO_CONVERT")
 
 
 @patch("requests.request")
@@ -23,7 +23,7 @@ def test_convert_transaction_amount_to_rub(mock_get: Mock, operation_usd: dict) 
     }
     mock_get.return_value = mock_response
     assert convert_transaction_amount_to_rub(operation_usd) == 3107807.0601964407
-    mock_get.assert_called_once_with("GET", URL_TO_CONVERT, headers=HEADERS)
+    mock_get.assert_called_once_with("GET", url=URL_TO_CONVERT, headers=HEADERS)
 
 
 def test_without_requests_convert_transaction_amount_to_rub(operation_rub: dict) -> None:
