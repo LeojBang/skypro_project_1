@@ -23,6 +23,22 @@ git clone https://github.com/LeojBang/skypro_project_1.git
 poetry install
 pip install -r requirements.txt
 ```
+## Использование
+
+1. Откройте скопированный проект.
+2. Загрузите ваш файл с банковскими операциями в папку data.
+3. Используйте модуль "main" для сортировки, поиска и вывода нужных вам операций
+4. Используйте модуль "generators" для генерации номеров банковских карт
+5. Используйте модуль "decorators" для логирования вызовов функций.
+
+- При использовании модуля "main" запустите его с помощью консоли используя команду:
+```
+python main.py
+```
+или
+```
+python3 main.py
+```
 
 ## Структура проекта
 
@@ -33,6 +49,7 @@ pip install -r requirements.txt
 │   ├── masks.py                   # Модуль с масками данных
 │   ├── decorators.py              # Модуль с декоратором
 │   ├── widget.py                  # Виджет для основной функциональности
+│   ├── file_reader.py             # Модуль зя чтения cvs или excel файлов
 │   ├── external_api.py            # Модуль конвертации через API
 │   ├── utils.py                   # Модуль для загрузки транзацкий из JSON файла
 │   ├── processing.py              # Модуль для обработки данных
@@ -43,6 +60,8 @@ pip install -r requirements.txt
 │   ├── conftest.py                # Общие фикстуры для тестов
 │   ├── test_masks.py              # Тесты для модуля masks.py
 │   ├── test_decorators.py         # Тесты для модуля обработки данных decorators.py
+│   ├── test_external_api.py       # Тесты для модуля конвертации через API external_api.py
+│   ├── test_file_reader.py        # Тесты для модуля чтения файлов cvs и excel file_reader.py
 │   ├── test_generators.py         # Тесты для модуля обработки данных generators.py
 │   ├── test_processing.py         # Тесты для модуля обработки данных processing.py
 │   └── test_widget.py             # Тесты для виджета widget.py
@@ -236,11 +255,21 @@ my_function error: тип ошибки. Inputs: (1, 2), {}
 
 **load_transaction**: Функция загружает данные о финансовых транзакциях из JSON-файла. Если файл пустой, содержит не
 список или не найден, возвращает пустой список.
+**filter_transaction_by_description**: Функция принимает список словарей с данными о банковских операциях и строку поиска, 
+а возвращает список словарей, у которых в описании есть данная строка.
+**counting_transactions_by_type**: Функция считает количество операций по заданным категориям.
+
 
 #### 6. External_api
 
 **convert_transaction_amount_to_rub**: Конвертирует сумму транзакции в рубли. Если валюта транзакции USD или EUR,
 использует API для получения курса и конвертации в рубли.
+
+#### 6. File_reader
+
+**read_transactions_from_csv**: Функция для считывания финансовых операций из CSV выдает список словарей с транзакциями
+
+**read_transactions_from_excel**: Функция для считывания финансовых операций из EXCEL выдает список словарей с транзакциями
 
 ## Тестирование
 

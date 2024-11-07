@@ -1,6 +1,6 @@
 from unittest.mock import Mock, mock_open, patch
-
-from src.utils import load_transaction
+from collections import Counter
+from src.utils import load_transaction, filter_transaction_by_description, counting_transactions_by_type
 
 
 @patch("os.path.exists", return_value=True)  # Патч для проверки существования файла
@@ -64,3 +64,21 @@ def test_load_transaction_not_a_list(mock_file: Mock, mock_exist: Mock) -> None:
     result = load_transaction("fake_path.json")
     assert result == []  # ожидаем пустой список, так как данные не список
     mock_file.assert_called_once_with("fake_path.json", "r")
+
+
+def test_filter_transaction_by_description(transactions: list) -> None:
+    assert filter_transaction_by_description(transactions, "CANCELED") == [
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "operationAmount": {"amount": "67314.70", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+    ]
+
+
+def test_counting_transactions_by_type(transactions: list) -> None:
+    assert counting_transactions_by_type(transactions, ["Перевод со счета на счет"]) == {"Перевод со счета на счет": 2}
