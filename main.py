@@ -1,5 +1,6 @@
 from src.masks import get_mask_card_number, get_mask_account
 from src.utils import load_transaction
+import pandas as pd
 
 if __name__ == "__main__":
     get_mask_card_number("1234567890123456")
