@@ -56,7 +56,7 @@ def filter_transaction_by_description(data_operations: list[dict], search_str: s
     return [
         operation
         for operation in data_operations
-        if isinstance(operation["state"], str) and re.search(pattern, operation.get("state", ""))
+        if isinstance(operation["description"], str) and re.search(pattern, operation.get("description", ""))
     ]
 
 
